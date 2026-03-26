@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CEA7643B-81E6-467F-BD20-6EB0CEA133DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoParkManagement.App", "src\AutoParkManagement.App\AutoParkManagement.App.csproj", "{5D8B68CB-569E-408D-9701-42D8E56052E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoParkManagement.Common", "AutoParkManagement.Common\AutoParkManagement.Common.csproj", "{031425B2-8E3B-4076-8D7B-6393348FE801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoParkManagement.Implementations", "AutoParkManagement.Implementations\AutoParkManagement.Implementations.csproj", "{9FE4C76C-90A7-456C-95FF-AD387A36E1FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3681E495-1376-4808-B257-2BD9B98FF35E}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D8B68CB-569E-408D-9701-42D8E56052E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D8B68CB-569E-408D-9701-42D8E56052E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D8B68CB-569E-408D-9701-42D8E56052E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D8B68CB-569E-408D-9701-42D8E56052E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031425B2-8E3B-4076-8D7B-6393348FE801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031425B2-8E3B-4076-8D7B-6393348FE801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031425B2-8E3B-4076-8D7B-6393348FE801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031425B2-8E3B-4076-8D7B-6393348FE801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE4C76C-90A7-456C-95FF-AD387A36E1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE4C76C-90A7-456C-95FF-AD387A36E1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE4C76C-90A7-456C-95FF-AD387A36E1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE4C76C-90A7-456C-95FF-AD387A36E1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5D8B68CB-569E-408D-9701-42D8E56052E2} = {CEA7643B-81E6-467F-BD20-6EB0CEA133DB}
+		{031425B2-8E3B-4076-8D7B-6393348FE801} = {CEA7643B-81E6-467F-BD20-6EB0CEA133DB}
+		{9FE4C76C-90A7-456C-95FF-AD387A36E1FC} = {CEA7643B-81E6-467F-BD20-6EB0CEA133DB}
+	EndGlobalSection
+EndGlobal
