@@ -8,11 +8,9 @@ public interface ICoreContext
 {
     DbSet<DriverEntity> Drivers { get; }
     
-    DbSet<MaintenanceEntity> Maintenances { get; }
-    
     DbSet<RouteEntity> Routes { get; }
     
-    DbSet<TransportEntity> Transports { get; }
+    DbSet<VehicleEntity> Vehicles { get; }
     
     DatabaseFacade Database { get; }
 

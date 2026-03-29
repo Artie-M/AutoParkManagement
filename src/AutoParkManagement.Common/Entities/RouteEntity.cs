@@ -6,11 +6,17 @@ namespace AutoParkManagement.Common.Entities;
 [Table("Routes")]
 public class RouteEntity
 {
-    [Key] public int Id { get; init; }
+    [Key] public uint Id { get; init; }
     
     [MaxLength(128)] public required string Name { get; set; }
     
     [MaxLength(128)] public required string StartPoint { get; set; }
     
     [MaxLength(128)] public required string FinishPoint { get; set; }
+    
+    public DateTimeOffset OrderTime { get; set; }
+    
+    public DateTimeOffset? CompletionTime { get; set; }
+    
+    public uint Driver { get; set; }
 }

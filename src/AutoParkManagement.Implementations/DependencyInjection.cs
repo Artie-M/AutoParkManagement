@@ -11,9 +11,7 @@ public static class DependencyInjection
     {
         return serviceCollection.AddDbContext<ICoreContext, CoreContext>(x =>
         {
-            x.UseMySql("server=localhost;port=3306;database=AutoPark;uid=root;pwd=root;", 
-                serverVersion: new MySqlServerVersion(new Version(8, 4, 4)));
-            //x.UseNpgsql(Environment.GetEnvironmentVariable("CONNECTION_STRING"));
+            x.UseNpgsql(Environment.GetEnvironmentVariable("CONNECTION_STRING"));
         });
     }
 }

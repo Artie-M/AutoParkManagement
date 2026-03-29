@@ -13,5 +13,8 @@ public class RoutesStoreConfiguration : IEntityTypeConfiguration<RouteEntity>
         builder.Property(e => e.Name).IsRequired();
         builder.Property(e => e.StartPoint).IsRequired();
         builder.Property(e => e.FinishPoint).IsRequired();
+        builder.Property(e => e.OrderTime).IsRequired();
+        builder.Property(e => e.CompletionTime);
+        builder.Property(e => e.Driver).IsRequired();
     }
 }

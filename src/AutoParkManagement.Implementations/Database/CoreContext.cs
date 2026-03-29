@@ -12,16 +12,14 @@ public class CoreContext : DbContext, ICoreContext
     }
     
     public DbSet<DriverEntity> Drivers => Set<DriverEntity>();
-    public DbSet<MaintenanceEntity> Maintenances => Set<MaintenanceEntity>();
     public DbSet<RouteEntity> Routes => Set<RouteEntity>();
-    public DbSet<TransportEntity> Transports => Set<TransportEntity>();
+    public DbSet<VehicleEntity> Vehicles => Set<VehicleEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new DriversStoreConfiguration());
-        modelBuilder.ApplyConfiguration(new MaintenanceStoreConfiguration());
         modelBuilder.ApplyConfiguration(new RoutesStoreConfiguration());
-        modelBuilder.ApplyConfiguration(new TransportStoreConfiguration());
+        modelBuilder.ApplyConfiguration(new VehiclesStoreConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }
