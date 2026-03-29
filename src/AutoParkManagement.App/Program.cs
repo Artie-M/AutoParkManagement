@@ -3,6 +3,7 @@ using AutoParkManagement.Common;
 using AutoParkManagement.Common.Database;
 using AutoParkManagement.EndpointManagers;
 using AutoParkManagement.Implementations;
+using Prometheus;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -25,11 +26,19 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseMetricServer();
 app.UseHttpsRedirection();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-DriverStoreEndpointManager.Singleton.RegisterEndpoints(app);
-app.MapGet("/", () => "Hello World!");
+DriversStoreEndpointManager.Singleton.RegisterEndpoints(app);
+RoutesStoreEndpointManager.Singleton.RegisterEndpoints(app);
+VehiclesStoreEndpointManager.Singleton.RegisterEndpoints(app);
+app.MapGet("/", async (HttpContext context) =>
+{
+    context.Response.ContentType = "text/html; charset=utf-8";
+    await context.Response.SendFileAsync(Path.Combine(app.Environment.WebRootPath, "index.html"));
+});
 
 if (app.Environment.IsDevelopment())
 {

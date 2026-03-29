@@ -10,14 +10,16 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
+        <PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
         <PackageReference Include="Serilog" Version="4.3.1" />
         <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+        <PackageReference Include="StackExchange.Redis" Version="3.0.2-preview" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\AutoParkManagement.Implementations\AutoParkManagement.Implementations.csproj" />
+      <ProjectReference Include="..\AutoParkManagement.Implementations\AutoParkManagement.Implementations.csproj" />
     </ItemGroup>
 
     <ItemGroup>
