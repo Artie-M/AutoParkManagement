@@ -7,11 +7,12 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
 COPY ["src/AutoParkManagement.App/AutoParkManagement.App.csproj", "src/AutoParkManagement.App/"]
-COPY ["AutoParkManagement.Implementations/AutoParkManagement.Implementations.csproj", "AutoParkManagement.Implementations/"]
-COPY ["AutoParkManagement.Common/AutoParkManagement.Common.csproj", "AutoParkManagement.Common/"]
+COPY ["src/AutoParkManagement.Implementations/AutoParkManagement.Implementations.csproj", "src/AutoParkManagement.Implementations/"]
+COPY ["src/AutoParkManagement.Common/AutoParkManagement.Common.csproj", "src/AutoParkManagement.Common/"]
 RUN dotnet restore "src/AutoParkManagement.App/AutoParkManagement.App.csproj"
-COPY . .
+COPY . . 
 WORKDIR "/src/src/AutoParkManagement.App"
 RUN dotnet build "AutoParkManagement.App.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

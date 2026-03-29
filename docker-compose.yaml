@@ -1,0 +1,51 @@
+﻿version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: src/AutoParkManagement.App/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - CONNECTION_STRING=Host=db;Port=5432;Database=autopark;Username=postgres;Password=postgres
+    ports:
+      - "5024:8080"
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=autopark
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+
+volumes:
+  postgres_data:
