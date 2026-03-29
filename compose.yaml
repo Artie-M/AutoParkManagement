@@ -1,6 +1,0 @@
-﻿services:
-  autoparkmanagement.app:
-    image: autoparkmanagement.app
-    build:
-      context: .
-      dockerfile: src/AutoParkManagement.App/Dockerfile
