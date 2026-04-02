@@ -22,7 +22,7 @@ public class RoutesStoreEndpointManager
         app.MapGet("api/routes/{id:min(0)}", GetRouteAsync);
         app.MapDelete("api/routes/{id:min(0)}", DeleteRouteAsync);
         app.MapPut("api/routes/{id:min(0)}", PutRouteAsync);
-        app.MapPost("api/routes/{id:min(0)}", PostRouteAsync);
+        app.MapPost("api/routes/", PostRouteAsync);
     }
 
     private async Task GetAllRoutesAsync(HttpContext httpContext)

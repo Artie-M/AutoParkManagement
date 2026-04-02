@@ -22,7 +22,7 @@ public class VehiclesStoreEndpointManager
         app.MapGet("api/vehicles/{id:min(0)}", GetVehicleAsync);
         app.MapDelete("api/vehicles/{id:min(0)}", DeleteVehicleAsync);
         app.MapPut("api/vehicles/{id:min(0)}", PutVehicleAsync);
-        app.MapPost("api/vehicles/{id:min(0)}", PostVehicleAsync);
+        app.MapPost("api/vehicles/", PostVehicleAsync);
     }
 
     private async Task GetAllVehiclesAsync(HttpContext httpContext)
