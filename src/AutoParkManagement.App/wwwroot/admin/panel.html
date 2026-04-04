@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Панель Администратора</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container" style="max-width: 1000px;">
+    <h1>Управление Автопарком</h1>
+    <button onclick="logout()" style="background-color: #dc3545; float: right;">Выйти</button>
+
+    <section>
+        <h2>Транспортные средства</h2>
+        <form id="vehicleForm" onsubmit="saveVehicle(event)">
+            <input type="hidden" id="vehicleId">
+            <input type="text" id="vName" placeholder="Название авто" required>
+            <input type="text" id="vNumber" placeholder="Номер (A000AA)" required>
+            <button type="submit">Сохранить авто</button>
+        </form>
+        <table id="vehiclesTable">
+            <thead><tr><th>ID</th><th>Название</th><th>Номер</th><th>Действия</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Водители</h2>
+        <form id="driverForm" onsubmit="saveDriver(event)">
+            <input type="hidden" id="driverId">
+            <input type="text" id="dName" placeholder="Имя" required>
+            <input type="number" id="dRating" placeholder="Рейтинг" required>
+            <input type="number" id="dCarId" placeholder="ID Авто" required>
+            <button type="submit">Сохранить водителя</button>
+        </form>
+        <table id="driversTable">
+            <thead><tr><th>ID</th><th>Имя</th><th>Рейтинг</th><th>ID Авто</th><th>Действия</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Заказы (Маршруты)</h2>
+        <button onclick="loadData()">Обновить данные</button>
+        <table id="routesTable">
+            <thead><tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>ID Водителя</th>
+                <th>Время заказа</th>
+                <th>Завершен</th>
+                <th>Действия</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+</div>
+
+<script>
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = '/login'; // Проверка авторизации 
+
+    const authHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Передача токена для доступа к эндпоинтам 
+    };
+
+    function logout() {
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+    }
+
+    async function loadData() {
+        await Promise.all([fetchVehicles(), fetchDrivers(), fetchRoutes()]);
+    }
+
+    async function fetchVehicles() {
+        const res = await fetch('/api/vehicles/', { headers: authHeaders });
+        if(res.status === 401) logout();
+        const data = await res.json();
+        const tbody = document.querySelector('#vehiclesTable tbody');
+        tbody.innerHTML = data.map(v => `<tr>
+            <td>${v.id}</td><td>${v.name}</td><td>${v.carNumber}</td>
+            <td><button onclick="deleteEntity('vehicles', ${v.id})">Удалить</button></td>
+        </tr>`).join('');
+    }
+
+    async function saveVehicle(e) {
+        e.preventDefault();
+        const payload = { name: document.getElementById('vName').value, carNumber: document.getElementById('vNumber').value };
+        await fetch('/api/vehicles/', { method: 'POST', headers: authHeaders, body: JSON.stringify(payload) });
+        document.getElementById('vehicleForm').reset();
+        fetchVehicles();
+    }
+
+    async function fetchDrivers() {
+        const res = await fetch('/api/drivers/', { headers: authHeaders });
+        const data = await res.json();
+        const tbody = document.querySelector('#driversTable tbody');
+        tbody.innerHTML = data.map(d => `<tr>
+            <td>${d.id}</td><td>${d.name}</td><td>${d.rating}</td><td>${d.carId}</td>
+            <td><button onclick="deleteEntity('drivers', ${d.id})">Удалить</button></td>
+        </tr>`).join('');
+    }
+
+    async function saveDriver(e) {
+        e.preventDefault();
+        const payload = {
+            name: document.getElementById('dName').value,
+            rating: parseInt(document.getElementById('dRating').value),
+            carId: parseInt(document.getElementById('dCarId').value)
+        };
+        await fetch('/api/drivers/', { method: 'POST', headers: authHeaders, body: JSON.stringify(payload) });
+        document.getElementById('driverForm').reset();
+        fetchDrivers();
+    }
+
+    async function fetchRoutes() {
+        const res = await fetch('/api/routes/', { headers: authHeaders });
+        const data = await res.json();
+        const tbody = document.querySelector('#routesTable tbody');
+        tbody.innerHTML = data.map(r => `<tr>
+            <td>${r.id}</td><td>${r.name}</td><td>${r.startPoint}</td><td>${r.finishPoint}</td><td>${r.driver}</td>
+            <td>${r.orderTime}</td><td>${r.completionTime}</td>
+            <td><button onclick="deleteEntity('routes', ${r.id})">Удалить</button></td>
+        </tr>`).join('');
+    }
+
+    async function deleteEntity(endpoint, id) {
+        if(confirm('Вы уверены?')) {
+            await fetch(`/api/${endpoint}/${id}`, { method: 'DELETE', headers: authHeaders });
+            loadData();
+        }
+    }
+
+    window.onload = loadData;
+</script>
+</body>
+</html>

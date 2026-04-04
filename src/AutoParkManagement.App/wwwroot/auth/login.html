@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход для администратора</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Панель администратора</h1>
+    <section class="form-section">
+        <h2>Вход в систему</h2>
+        <form id="loginForm">
+            <div>
+                <label>Имя пользователя:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div>
+                <label>Пароль:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+        <p id="errorMsg" style="color: red;"></p>
+    </section>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+
+        const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: user, password: pass })
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            localStorage.setItem('token', data.token); // Сохранение JWT токена
+            window.location.href = '/panel'; // Перенаправление на панель
+        } else {
+            document.getElementById('errorMsg').innerText = "Неверные учетные данные!";
+        }
+    });
+</script>
+</body>
+</html>
