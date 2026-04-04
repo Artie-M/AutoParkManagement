@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 		nginx.conf = nginx.conf
 		prometheus.yml = prometheus.yml
+		.github\workflows\ci.yml = .github\workflows\ci.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoParkManagement.Common", "src\AutoParkManagement.Common\AutoParkManagement.Common.csproj", "{1280BAC8-1899-453E-8FC7-C5E9432F2054}"

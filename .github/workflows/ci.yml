@@ -1,0 +1,26 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ "**" ] # выполняется при каждом push в репозиторий 
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Получение кода репозитория
+        uses: actions/checkout@v4  
+
+      - name: 2. Установка .NET SDK
+        uses: actions/setup-dotnet@v4 
+        with:
+          dotnet-version: '8.0.x' # установка SDK 
+
+      - name: 3. Восстановление зависимостей
+        run: dotnet restore src/AutoParkManagement.App/AutoParkManagement.App.csproj 
+
+      - name: 4. Сборка проекта
+        run: dotnet build src/AutoParkManagement.App/AutoParkManagement.App.csproj --no-restore --configuration Release 
+
+      - name: 5. Запуск автоматических тестов
+        run: dotnet test src/AutoParkManagement.App/AutoParkManagement.App.csproj --no-build --verbosity normal

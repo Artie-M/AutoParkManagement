@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: src/AutoParkManagement.App/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - CONNECTION_STRING=Host=db;Port=5432;Database=autopark;Username=postgres;Password=postgres
     ports:
       - "5024:8080"
