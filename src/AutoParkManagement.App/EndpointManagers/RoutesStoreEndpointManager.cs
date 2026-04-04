@@ -1,5 +1,6 @@
 using AutoParkManagement.Common.Database;
 using AutoParkManagement.Common.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoParkManagement.EndpointManagers;
@@ -55,6 +56,7 @@ public class RoutesStoreEndpointManager
         await httpContext.Response.WriteAsJsonAsync(driver);
     }
     
+    [Authorize(Roles = "Admin")] 
     private async Task DeleteRouteAsync(uint id, HttpContext httpContext)
     {
         using var scope = _app.Services.CreateScope();
@@ -72,6 +74,7 @@ public class RoutesStoreEndpointManager
         httpContext.Response.StatusCode = 204; // No Content
     }
 
+    [Authorize(Roles = "Admin")] 
     private async Task PutRouteAsync(uint id, HttpContext httpContext)
     {
         using var scope = _app.Services.CreateScope();
@@ -102,7 +105,7 @@ public class RoutesStoreEndpointManager
         httpContext.Response.StatusCode = 204;
     }
 
-    private async Task PostRouteAsync(uint id, HttpContext httpContext)
+    private async Task PostRouteAsync(HttpContext httpContext)
     {
         using var scope = _app.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<ICoreContext>();

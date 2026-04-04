@@ -1,5 +1,6 @@
 using AutoParkManagement.Common.Database;
 using AutoParkManagement.Common.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoParkManagement.EndpointManagers;
@@ -55,6 +56,7 @@ public class VehiclesStoreEndpointManager
         await httpContext.Response.WriteAsJsonAsync(driver);
     }
     
+    [Authorize(Roles = "Admin")] 
     private async Task DeleteVehicleAsync(uint id, HttpContext httpContext)
     {
         using var scope = _app.Services.CreateScope();
@@ -72,6 +74,7 @@ public class VehiclesStoreEndpointManager
         httpContext.Response.StatusCode = 204; // No Content
     }
 
+    [Authorize(Roles = "Admin")] 
     private async Task PutVehicleAsync(uint id, HttpContext httpContext)
     {
         using var scope = _app.Services.CreateScope();
@@ -98,7 +101,8 @@ public class VehiclesStoreEndpointManager
         httpContext.Response.StatusCode = 204;
     }
 
-    private async Task PostVehicleAsync(uint id, HttpContext httpContext)
+    [Authorize(Roles = "Admin")] 
+    private async Task PostVehicleAsync(HttpContext httpContext)
     {
         using var scope = _app.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<ICoreContext>();
