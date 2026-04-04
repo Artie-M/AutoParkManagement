@@ -10,6 +10,8 @@ public interface ICoreContext
     
     DbSet<RouteEntity> Routes { get; }
     
+    DbSet<UserEntity> Users { get; }
+    
     DbSet<VehicleEntity> Vehicles { get; }
     
     DatabaseFacade Database { get; }

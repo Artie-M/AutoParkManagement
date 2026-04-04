@@ -12,7 +12,11 @@ public class CoreContext : DbContext, ICoreContext
     }
     
     public DbSet<DriverEntity> Drivers => Set<DriverEntity>();
+    
     public DbSet<RouteEntity> Routes => Set<RouteEntity>();
+    
+    public DbSet<UserEntity> Users => Set<UserEntity>();
+    
     public DbSet<VehicleEntity> Vehicles => Set<VehicleEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
