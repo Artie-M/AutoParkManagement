@@ -4,7 +4,7 @@
 
 ## Технологический стек
 
-* **Backend:** C# / .NET 8 (Web API) 
+* **Backend:** C# (v12.0) / .NET 8 (Web API) 
   * **Поддерживаемая версия .NET SDK:** `8.0.403`
 * **Frontend:** HTML5, CSS3, Vanilla JavaScript
 * **База данных:** PostgreSQL 15
