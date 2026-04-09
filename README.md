@@ -18,6 +18,9 @@
 Для локального развертывания системы убедитесь, что осуществляется поддержка **Docker** и **Docker compose**.
 
 1. Склонируйте репозиторий.
+   ```bash
+   git clone https://github.com/Artie-M/AutoParkManagement.git
+   ```
 2. В корневой директории проекта (где находится `docker-compose.yaml`) выполните команду:
    ```bash
    docker compose up --build -d
